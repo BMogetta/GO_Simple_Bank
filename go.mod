@@ -1,4 +1,4 @@
-module github.com/BMogetta/simple_bank
+module github.com/BMogetta/Simple_bank
 
 go 1.19
 
