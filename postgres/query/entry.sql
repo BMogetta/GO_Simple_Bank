@@ -3,7 +3,7 @@ INSERT INTO entries (
   account_id,
   amount
 ) VALUES (
-    $1, $2
+  $1, $2
 ) RETURNING *;
 
 -- name: GetEntry :one

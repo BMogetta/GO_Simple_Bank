@@ -94,7 +94,6 @@ func (store *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (Tr
 			return err
 		}
 
-		//avoid deadlocks by allways updating first the account with the smallest ID
 		if arg.FromAccountID < arg.ToAccountID {
 			result.FromAccount, result.ToAccount, err = addMoney(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
 		} else {
@@ -115,7 +114,6 @@ func addMoney(
 	accountID2 int64,
 	amount2 int64,
 ) (account1 Account, account2 Account, err error) {
-
 	account1, err = q.AddAccountBalance(ctx, AddAccountBalanceParams{
 		ID:     accountID1,
 		Amount: amount1,

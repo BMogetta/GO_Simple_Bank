@@ -6,9 +6,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/BMogetta/Simple_bank/util"
 	"github.com/stretchr/testify/require"
 )
 
+// create users for testing
 func createRandomUser(t *testing.T) User {
 	hashedPassword, err := util.HashPassword(util.RandomString(6))
 	require.NoError(t, err)
