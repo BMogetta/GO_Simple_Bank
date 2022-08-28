@@ -44,7 +44,7 @@ To build the database documentation page: (dbdocs)[dbdocs.io/docs]
   * `dbdocs login` and follow the instructions
   * `make db_docs`
 
-Make will call: `dbdocs build postgres/doc/db.dbml`
+Make will call: `dbdocs build doc/db.dbml`
 
 You could secure the docs with a password with:
   * `dbdocs password --set <your-password> --project Simple_bank`
@@ -53,9 +53,9 @@ To generate the POSTGRES SQL code: (dbml)[dbml.org/cli/]
   * `sudo npm install -g @dbml/cli`
   * `make db_schema`
 
-Make will call: `dbml2sql --postgres -o postgres/doc/schema.sql postgres/doc/db.dbml`
+Make will call: `dbml2sql --postgres -o doc/schema.sql doc/db.dbml`
 
 To modify the DB Schema:
-    * update the code of postgres/doc/db.dbml
+    * update the code of doc/db.dbml
     * `make db_docs`
     * `make db_schema`

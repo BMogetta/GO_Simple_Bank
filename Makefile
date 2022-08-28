@@ -22,10 +22,10 @@ migratedown1:
 	migrate -path postgres/migration -database "$(DB_URL)" -verbose down 1
 
 db_docs:
-	dbdocs build postgres/doc/db.dbml
+	dbdocs build doc/db.dbml
 
 db_schema:
-	dbml2sql --postgres -o postgres/doc/schema.sql postgres/doc/db.dbml
+	dbml2sql --postgres -o doc/schema.sql doc/db.dbml
 
 sqlc:
 	sqlc generate
