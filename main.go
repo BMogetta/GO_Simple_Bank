@@ -43,6 +43,7 @@ func main() {
 	runGrpcServer(config, store)
 }
 
+// migrate DB directly en GO code
 func runDBMigration(migrationURL string, dbSource string) {
 
 	migration, err := migrate.New(migrationURL, dbSource)
