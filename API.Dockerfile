@@ -8,9 +8,11 @@ RUN go build -o main main.go
 ##########  RUN   ##########
 
 FROM alpine:3.16
+#TODO: add user to this container
 WORKDIR /app
-COPY --from=builder /app/main .
-COPY [".env", "start.sh", "wait-for.sh", "./"]
+COPY --from=builder /app/main ./
+#TODO: fix env file
+COPY ["example.env", "start.sh", "wait-for.sh", "./"]
 COPY postgres/migration ./postgres/migration
 
 EXPOSE 8080

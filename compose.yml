@@ -2,8 +2,9 @@ version: '3.7'
 
 services:
   postgres:
-    image: postgres:14.5-alpine3.16
     container_name: postgres
+    build:
+      context: ./postgres
     restart: always
     ports:
       - '5432:5432'
@@ -11,24 +12,23 @@ services:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       POSTGRES_DB: $POSTGRES_DB
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+    networks:
+      bank_network:
+        aliases:
+          - postgres_ip
 
   api:
+    container_name: bank-api
     build:
       context: .
       dockerfile: API.Dockerfile
-    container_name: bank-api
     ports:
       - '8080:8080'
     environment:
       - DB_SOURCE=$DB_SOURCE
-    depends_on:
-      postgres:
-        condition: service_healthy
+    #depends_on:
+    #  postgres:
+    #    condition: service_healthy
     entrypoint:
       [
         "/app/wait-for.sh",
@@ -37,7 +37,15 @@ services:
         "/app/start.sh"
       ]
     command: [ "/app/main" ]
+    networks:
+      bank_network:
+        aliases:
+          - api_ip
 
 volumes: {}
 
-networks: {}
+networks: 
+  bank_network:
+    driver: bridge
+    ipam:               #ip address management
+      driver: default
