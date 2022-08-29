@@ -6,6 +6,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/BMogetta/Simple_bank/util"
 	_ "github.com/lib/pq"
 )
 

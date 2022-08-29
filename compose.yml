@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  postgres:
+    build:
+      context: ./postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      POSTGRES_DB: $POSTGRES_DB
+    networks:
+      bank_network:
+        aliases:
+          - postgres_ip
+
+  api:
+    build:
+      context: .
+      dockerfile: API.Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - DB_SOURCE=$DB_SOURCE
+    depends_on:
+      - postgres
+    #    condition: service_healthy
+    entrypoint:
+      [
+        "/app/wait-for.sh",
+        "postgres_ip:5432",
+        "--",
+        "/app/start.sh"
+      ]
+    command: [ "/app/main" ]
+    networks:
+      bank_network:
+        aliases:
+          - api_ip
+
+volumes: {}
+
+networks: 
+  bank_network:
+    name: bank_net
+    driver: bridge
+    ipam:               #ip address management
+      driver: default
