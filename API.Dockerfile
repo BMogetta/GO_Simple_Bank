@@ -11,8 +11,7 @@ FROM alpine:3.16
 #TODO: add user to this container
 WORKDIR /app
 COPY --from=builder /app/main ./
-#TODO: fix env file
-COPY ["example.env", "start.sh", "wait-for.sh", "./"]
+COPY ["app.env", "start.sh", "wait-for.sh", "./"]
 COPY postgres/migration ./postgres/migration
 
 EXPOSE 8080
