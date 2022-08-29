@@ -9,7 +9,7 @@ on:
 jobs:
 
   test:
-    name: Test
+    name: Run Unit Test
     runs-on: ubuntu-latest
     # https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
     services:
