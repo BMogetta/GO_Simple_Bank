@@ -1,8 +1,5 @@
 DB_URL=postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
 
-mysql:
-	docker run --name mysql8 -p 3306:3306  -e MYSQL_ROOT_PASSWORD=secret -d mysql:8
-
 createdb:
 	docker exec -it postgres createdb --username=root --owner=root simple_bank
 
