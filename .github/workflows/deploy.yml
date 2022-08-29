@@ -14,10 +14,11 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+# https://github.com/marketplace/actions/kubectl-tool-installer
     - name: Install kubectl
       uses: azure/setup-kubectl@v1
       with:
-        version: 'v1.21.3'
+        version: 'v1.25.0'
       id: install
 
 # https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
@@ -46,7 +47,7 @@ jobs:
         docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --name go-bank --region sa-east-1
+      run: aws eks update-kubeconfig --name goBank --region sa-east-1
 
     - name: Deploy image to Amazon EKS
       run: |
