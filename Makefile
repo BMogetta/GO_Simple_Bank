@@ -1,5 +1,11 @@
 DB_URL=postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
 
+network:
+	docker network create bank-network
+
+postgres:
+	docker run --name postgres --network bank-network -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:14-alpine
+
 createdb:
 	docker exec -it postgres createdb --username=root --owner=root simple_bank
 
@@ -49,4 +55,4 @@ proto:
 evans:
 	evans --host localhost --port 9090 -r repl
 
-.PHONY: createdb dropdb migrateup migratedown migrateup1 migratedown1 db_docs db_schema sqlc test server mock proto evans
+.PHONY: network postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 db_docs db_schema sqlc test server mock proto evans
