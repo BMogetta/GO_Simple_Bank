@@ -26,7 +26,6 @@ services:
       - DB_SOURCE=$DB_SOURCE
     depends_on:
       - postgres
-    #    condition: service_healthy
     entrypoint:
       [
         "/app/wait-for.sh",
