@@ -13,3 +13,13 @@
   * `tar -xf k9s.tgz`
   * `sudo install k9s /usr/local/bin/`
   * run with `k9s`
+
+
+https://kubernetes.github.io/ingress-nginx/deploy/#aws
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/aws/deploy.yaml
+
+
+https://cert-manager.io/
+
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml

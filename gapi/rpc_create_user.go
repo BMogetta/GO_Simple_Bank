@@ -3,8 +3,8 @@ package gapi
 import (
 	"context"
 
-	"github.com/BMogetta/Simple_bank/pb"
 	db "github.com/BMogetta/Simple_bank/postgres/sqlc"
+	pb "github.com/BMogetta/Simple_bank/proto_go"
 	"github.com/BMogetta/Simple_bank/util"
 	"github.com/BMogetta/Simple_bank/val"
 	"github.com/lib/pq"
@@ -14,16 +14,19 @@ import (
 )
 
 func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
+
 	violations := validateCreateUserRequest(req)
 	if violations != nil {
 		return nil, invalidArgumentError(violations)
 	}
 
+	// use Get() for safety check
 	hashedPassword, err := util.HashPassword(req.GetPassword())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to hash password: %s", err)
 	}
 
+	// use Get() for safety check
 	arg := db.CreateUserParams{
 		Username:       req.GetUsername(),
 		HashedPassword: hashedPassword,
@@ -31,6 +34,7 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 		Email:          req.GetEmail(),
 	}
 
+	// creating user
 	user, err := server.store.CreateUser(ctx, arg)
 	if err != nil {
 		if pqErr, ok := err.(*pq.Error); ok {
@@ -42,13 +46,14 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
 	}
 
-	rsp := &pb.CreateUserResponse{
+	resp := &pb.CreateUserResponse{
 		User: convertUser(user),
 	}
-	return rsp, nil
+	return resp, nil
 }
 
 func validateCreateUserRequest(req *pb.CreateUserRequest) (violations []*errdetails.BadRequest_FieldViolation) {
+
 	if err := val.ValidateUsername(req.GetUsername()); err != nil {
 		violations = append(violations, fieldViolation("username", err))
 	}

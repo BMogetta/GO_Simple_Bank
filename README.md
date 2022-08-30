@@ -61,3 +61,27 @@ Make will call -> `dbml2sql --postgres -o doc/schema.sql doc/db.dbml`
   * update the code of doc/db.dbml
   * `make db_docs`
   * `make db_schema`
+
+## [gRPC](https://grpc.io/docs/)
+
+### [proto compiler](https://grpc.io/docs/protoc-installation/)
+  * `sudo apt install -y protobuf-compiler`
+  * `protoc --version`
+
+### [Go plugins](https://grpc.io/docs/languages/go/quickstart/)
+  * go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+  * go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+
+## gRPC client for testing: [evans](https://github.com/ktr0731/evans)
+
+  * `curl -Lo evans.tgz https://github.com/ktr0731/evans/releases/download/v0.10.9/evans_linux_amd64.tar.gz`
+  * `tar -xf evans.tgz`
+  * `sudo install evans /usr/local/bin/`
+  * run with `evans`
+
+## [gRPC-Gateway](https://grpc-ecosystem.github.io/grpc-gateway/)
+    `go install \`
+    `github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway \`
+    `github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2 \`
+    `google.golang.org/protobuf/cmd/protoc-gen-go \`
+    `google.golang.org/grpc/cmd/protoc-gen-go-grpc`

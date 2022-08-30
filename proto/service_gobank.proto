@@ -7,7 +7,7 @@ import "rpc_create_user.proto";
 import "rpc_login_user.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
-option go_package = "github.com/BMogetta/Simple_bank/pb";
+option go_package = "github.com/BMogetta/Simple_bank/proto_go";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 	info: {
@@ -21,7 +21,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 	};
 };
 
-service SimpleBank {
+service GoBank {
     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {
         option (google.api.http) = {
             post: "/v1/create_user"

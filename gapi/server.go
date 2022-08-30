@@ -3,8 +3,8 @@ package gapi
 import (
 	"fmt"
 
-	"github.com/BMogetta/Simple_bank/pb"
 	db "github.com/BMogetta/Simple_bank/postgres/sqlc"
+	pb "github.com/BMogetta/Simple_bank/proto_go"
 	"github.com/BMogetta/Simple_bank/token"
 	"github.com/BMogetta/Simple_bank/util"
 )

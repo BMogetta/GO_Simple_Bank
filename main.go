@@ -10,8 +10,8 @@ import (
 	"github.com/BMogetta/Simple_bank/api"
 	_ "github.com/BMogetta/Simple_bank/doc/statik"
 	"github.com/BMogetta/Simple_bank/gapi"
-	"github.com/BMogetta/Simple_bank/pb"
 	db "github.com/BMogetta/Simple_bank/postgres/sqlc"
+	pb "github.com/BMogetta/Simple_bank/proto_go"
 	"github.com/BMogetta/Simple_bank/util"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
@@ -40,6 +40,8 @@ func main() {
 
 	store := db.NewStore(conn)
 	go runGatewayServer(config, store)
+
+	// changing this call will switch between Gin Server [HTTP] or gRPC Server [GRPC]
 	runGrpcServer(config, store)
 }
 
@@ -58,6 +60,7 @@ func runDBMigration(migrationURL string, dbSource string) {
 	log.Println("db migrated successfully")
 }
 
+// runGrpcServer runs the gRPC server
 func runGrpcServer(config util.Config, store db.Store) {
 
 	server, err := gapi.NewServer(config, store)
@@ -67,6 +70,8 @@ func runGrpcServer(config util.Config, store db.Store) {
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterSimpleBankServer(grpcServer, server)
+
+	// reflection es optional, but recommended
 	reflection.Register(grpcServer)
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)
@@ -75,12 +80,14 @@ func runGrpcServer(config util.Config, store db.Store) {
 	}
 
 	log.Printf("start gRPC server at %s", listener.Addr().String())
+
 	err = grpcServer.Serve(listener)
 	if err != nil {
 		log.Fatal("cannot start gRPC server:", err)
 	}
 }
 
+// runGatewayServer handles http request
 func runGatewayServer(config util.Config, store db.Store) {
 
 	server, err := gapi.NewServer(config, store)
@@ -130,6 +137,7 @@ func runGatewayServer(config util.Config, store db.Store) {
 	}
 }
 
+// runGinServer runs the Gin server
 func runGinServer(config util.Config, store db.Store) {
 
 	server, err := api.NewServer(config, store)

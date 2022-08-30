@@ -4,7 +4,9 @@ package pb;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/BMogetta/Simple_bank/pb";
+option go_package = "github.com/BMogetta/Simple_bank/proto_go";
+
+// <data-type> <name-of-the-field> = <field-number>
 
 message User {
     string username = 1;

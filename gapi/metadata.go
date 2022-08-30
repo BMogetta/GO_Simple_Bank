@@ -19,6 +19,7 @@ type Metadata struct {
 }
 
 func (server *Server) extractMetadata(ctx context.Context) *Metadata {
+
 	mtdt := &Metadata{}
 
 	if md, ok := metadata.FromIncomingContext(ctx); ok {

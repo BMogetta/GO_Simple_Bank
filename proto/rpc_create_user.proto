@@ -4,7 +4,9 @@ package pb;
 
 import "user.proto";
 
-option go_package = "github.com/BMogetta/Simple_bank/pb";
+option go_package = "github.com/BMogetta/Simple_bank/proto_go";
+
+// <data-type> <name-of-the-field> = <field-number>
 
 message CreateUserRequest {
     string username = 1;
@@ -12,6 +14,8 @@ message CreateUserRequest {
     string email = 3;
     string password = 4;
 }
+
+// <data-type> <name-of-the-field> = <field-number>
 
 message CreateUserResponse {
     User user = 1;
