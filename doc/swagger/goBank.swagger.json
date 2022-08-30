@@ -30,7 +30,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/proto_goCreateUserResponse"
+              "$ref": "#/definitions/pbCreateUserResponse"
             }
           },
           "default": {
@@ -46,7 +46,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/proto_goCreateUserRequest"
+              "$ref": "#/definitions/pbCreateUserRequest"
             }
           }
         ],
@@ -64,7 +64,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/proto_goLoginUserResponse"
+              "$ref": "#/definitions/pbLoginUserResponse"
             }
           },
           "default": {
@@ -80,7 +80,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/proto_goLoginUserRequest"
+              "$ref": "#/definitions/pbLoginUserRequest"
             }
           }
         ],
@@ -91,7 +91,7 @@
     }
   },
   "definitions": {
-    "proto_goCreateUserRequest": {
+    "pbCreateUserRequest": {
       "type": "object",
       "properties": {
         "username": {
@@ -108,15 +108,15 @@
         }
       }
     },
-    "proto_goCreateUserResponse": {
+    "pbCreateUserResponse": {
       "type": "object",
       "properties": {
         "user": {
-          "$ref": "#/definitions/proto_goUser"
+          "$ref": "#/definitions/pbUser"
         }
       }
     },
-    "proto_goLoginUserRequest": {
+    "pbLoginUserRequest": {
       "type": "object",
       "properties": {
         "username": {
@@ -127,11 +127,11 @@
         }
       }
     },
-    "proto_goLoginUserResponse": {
+    "pbLoginUserResponse": {
       "type": "object",
       "properties": {
         "user": {
-          "$ref": "#/definitions/proto_goUser"
+          "$ref": "#/definitions/pbUser"
         },
         "sessionId": {
           "type": "string"
@@ -152,7 +152,7 @@
         }
       }
     },
-    "proto_goUser": {
+    "pbUser": {
       "type": "object",
       "properties": {
         "username": {

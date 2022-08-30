@@ -74,7 +74,7 @@ func runGrpcServer(config util.Config, store db.Store) {
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterSimpleBankServer(grpcServer, server)
+	pb.RegisterGoBankServer(grpcServer, server)
 
 	// reflection es optional, but recommended
 	reflection.Register(grpcServer)
@@ -114,7 +114,7 @@ func runGatewayServer(config util.Config, store db.Store) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	err = pb.RegisterSimpleBankHandlerServer(ctx, grpcMux, server)
+	err = pb.RegisterGoBankHandlerServer(ctx, grpcMux, server)
 	if err != nil {
 		log.Fatal("cannot register handler server:", err)
 	}
