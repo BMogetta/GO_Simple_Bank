@@ -39,9 +39,11 @@ func main() {
 	runDBMigration(config.MigrationURL, config.DBSource)
 
 	store := db.NewStore(conn)
+
+	// use "go" to create a separate rutine, this prevents both server to block eachother
 	go runGatewayServer(config, store)
 
-	// changing this call will switch between Gin Server [HTTP] or gRPC Server [GRPC]
+	// changing this call will switch between Gin Server [HTTP] or gRPC Server [GRPC+HTTP]
 	runGrpcServer(config, store)
 }
 
@@ -117,11 +119,13 @@ func runGatewayServer(config util.Config, store db.Store) {
 	mux := http.NewServeMux()
 	mux.Handle("/", grpcMux)
 
+	// using statik to load binary swagger assets
 	statikFS, err := fs.New()
 	if err != nil {
 		log.Fatal("cannot create statik fs:", err)
 	}
 
+	// swagger handler
 	swaggerHandler := http.StripPrefix("/swagger/", http.FileServer(statikFS))
 	mux.Handle("/swagger/", swaggerHandler)
 

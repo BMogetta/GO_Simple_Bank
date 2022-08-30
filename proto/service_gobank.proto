@@ -11,12 +11,12 @@ option go_package = "github.com/BMogetta/Simple_bank/proto_go";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 	info: {
-		title: "Simple Bank API";
-		version: "1.1";
+		title: "goBank API";
+		version: "1.0";
 		contact: {
-			name: "Tech School";
-			url: "https://github.com/techschool";
-			email: "techschool.guru@gmail.com";
+			name: "Bruno Mogetta";
+			url: "https://github.com/BMogetta";
+			email: "brunomogetta@gmail.com";
 		};
 	};
 };
