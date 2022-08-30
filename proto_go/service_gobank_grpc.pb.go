@@ -36,7 +36,7 @@ func NewGoBankClient(cc grpc.ClientConnInterface) GoBankClient {
 
 func (c *goBankClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
 	out := new(CreateUserResponse)
-	err := c.cc.Invoke(ctx, "/pb.GoBank/CreateUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto_go.GoBank/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +45,7 @@ func (c *goBankClient) CreateUser(ctx context.Context, in *CreateUserRequest, op
 
 func (c *goBankClient) LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error) {
 	out := new(LoginUserResponse)
-	err := c.cc.Invoke(ctx, "/pb.GoBank/LoginUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto_go.GoBank/LoginUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func _GoBank_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.GoBank/CreateUser",
+		FullMethod: "/proto_go.GoBank/CreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GoBankServer).CreateUser(ctx, req.(*CreateUserRequest))
@@ -112,7 +112,7 @@ func _GoBank_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.GoBank/LoginUser",
+		FullMethod: "/proto_go.GoBank/LoginUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GoBankServer).LoginUser(ctx, req.(*LoginUserRequest))
@@ -124,7 +124,7 @@ func _GoBank_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GoBank_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pb.GoBank",
+	ServiceName: "proto_go.GoBank",
 	HandlerType: (*GoBankServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
