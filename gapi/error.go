@@ -6,6 +6,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// handle of errors in the input fields
 func fieldViolation(field string, err error) *errdetails.BadRequest_FieldViolation {
 	return &errdetails.BadRequest_FieldViolation{
 		Field:       field,
@@ -13,7 +14,9 @@ func fieldViolation(field string, err error) *errdetails.BadRequest_FieldViolati
 	}
 }
 
+// invalidArgumentError take a list of field violations object and return an Error object
 func invalidArgumentError(violations []*errdetails.BadRequest_FieldViolation) error {
+
 	badRequest := &errdetails.BadRequest{FieldViolations: violations}
 	statusInvalid := status.New(codes.InvalidArgument, "invalid parameters")
 

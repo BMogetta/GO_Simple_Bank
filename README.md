@@ -1,4 +1,6 @@
 
+https://www.youtube.com/c/TECHSCHOOLGURU
+
 ## Graphical view of the DB with [DBeaver](https://dbeaver.io/)
 
 # [migrate package & install instructions](https://github.com/golang-migrate/migrate)

@@ -43,7 +43,10 @@ func main() {
 	// use "go" to create a separate rutine, this prevents both server to block eachother
 	go runGatewayServer(config, store)
 
-	// changing this call will switch between Gin Server [HTTP] or gRPC Server [GRPC+HTTP]
+	/*
+	*changing this call will switch between Gin Server [HTTP] or gRPC Server [GRPC+HTTP]
+	*runGinServer(config, store)
+	 */
 	runGrpcServer(config, store)
 }
 
