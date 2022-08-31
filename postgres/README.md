@@ -69,3 +69,12 @@ DBML comes with a built-in CLI which can be used to convert between different fo
   1. update the code of doc/db.dbml
   2. `make db_docs`
   3. `make db_schema`
+
+---
+
+## To review the DB docs
+
+Run the project (with docker-compose or manually), open your brownser and
+
+`http://localhost:8080/swagger/`
+
