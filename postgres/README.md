@@ -74,7 +74,7 @@ DBML comes with a built-in CLI which can be used to convert between different fo
 
 ## To review the DB docs
 
-Run the project (with docker-compose or manually), open your brownser and
+Run the project (with docker-compose or manually), open your brownser and paste:
 
 `http://localhost:8080/swagger/`
 
