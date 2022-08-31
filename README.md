@@ -153,3 +153,22 @@ You can use the tools in GitHub Actions to monitor and debug your workflows.
 ## [Deploying with GitHub Actions](https://docs.github.com/en/actions/deployment/about-deployments/deploying-with-github-actions)
 
 Learn how to control deployments with features like environments and concurrency.
+
+---
+---
+### ***Final clean up***
+
+Once I finish the course I decided to cleanup the commit history -it had a lot of unnecessary test and tries- and when I eventually revisit this project to recap some of the implementations I would like to see a smooth gh page.
+
+The steps that I use:
+ First delete all branches -and tags if you have some- besides master. Then unprotect the master branch
+
+```
+git checkout --orphan finish
+git add -A
+git commit -S -m "finish"
+git branch -D master
+git branch -m master
+git push -f origin master
+git gc --aggressive --prune=all
+```
