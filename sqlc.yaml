@@ -1,0 +1,9 @@
+version: 1
+packages:
+  - name: "db"
+    path: "./postgres/sqlc/"
+    engine: "postgresql"
+    schema: "/postgres/migration/"
+    queries: "/postgres/query/"
+    emit_empty_slices: true
+    emit_interface: true

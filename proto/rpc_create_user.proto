@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pb;
+
+import "user.proto";
+
+option go_package = "github.com/BMogetta/goBank_go-course/proto_go";
+
+// <data-type> <name-of-the-field> = <field-number>
+
+message CreateUserRequest {
+    string username = 1;
+    string full_name = 2;
+    string email = 3;
+    string password = 4;
+}
+
+// <data-type> <name-of-the-field> = <field-number>
+
+message CreateUserResponse {
+    User user = 1;
+}
