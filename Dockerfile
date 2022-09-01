@@ -13,9 +13,10 @@ RUN adduser \
     --disabled-password \
     --no-create-home \
     "go"
-COPY --from=builder --chown=go:go /app/main ./
-COPY --chown=go:go ["app.env", "start.sh", "wait-for.sh", "./"]
-COPY --chown=go:go postgres/migration ./postgres/migration
+COPY --from=builder /app/main ./
+COPY ["app.env", "start.sh", "wait-for.sh", "./"]
+COPY postgres/migration ./postgres/migration
+RUN chown -R go:go /app
 
 EXPOSE 8080
 CMD [ "/app/main" ]
